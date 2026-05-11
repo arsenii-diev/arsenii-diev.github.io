@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Арсений Диев | Монтажник слаботочных систем</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter + Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(125deg, #eef2ff 0%, #e0e7f5 100%);
+            font-family: 'Inter', sans-serif;
+            color: #10182F;
+            padding: 2rem 1.5rem;
+        }
+
+        :root {
+            --indigo-900: #0A1A4A;
+            --indigo-700: #1E2F6E;
+            --indigo-500: #3F51A0;
+            --indigo-200: #C7D3FF;
+            --indigo-50: #EEF2FF;
+            --glass-white: rgba(255,255,255,0.92);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass-white);
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 45px -20px rgba(10, 26, 74, 0.3), 0 0 0 1px rgba(63, 81, 160, 0.1);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--indigo-900) 0%, var(--indigo-700) 100%);
+            padding: 2.2rem 2.5rem;
+            position: relative;
+            color: white;
+        }
+
+        .hero::after {
+            content: "▰▰▰";
+            font-size: 180px;
+            opacity: 0.06;
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            font-family: monospace;
+            pointer-events: none;
+        }
+
+        .flex-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .name-title h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #FFFFFF, #C7D3FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .badge-role {
+            background: rgba(255,255,255,0.12);
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .salary-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 60px;
+            padding: 0.7rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .salary-box .big {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .salary-box .small {
+            font-size: 0.75rem;
+            opacity: 0.85;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        .contact-pill {
+            background: rgba(255,255,255,0.08);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-pill a, .contact-pill span {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-pill i {
+            width: 1.3rem;
+        }
+
+        .messenger-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .messenger-link {
+            background: rgba(255,255,255,0.07);
+            border-radius: 40px;
+            padding: 0.45rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.85rem;
+            color: #f0f3ff;
+            text-decoration: none;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .messenger-link i {
+            font-size: 1.1rem;
+        }
+
+        .messenger-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .quick-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .stat {
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            padding: 0.25rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .content-inner {
+            padding: 2.2rem 2.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .hero {
+                padding: 1.5rem;
+            }
+            .content-inner {
+                padding: 1.5rem;
+            }
+            .name-title h1 {
+                font-size: 1.9rem;
+            }
+        }
+
+        .info-card {
+            background: #FFFFFF;
+            border-radius: 1.5rem;
+            padding: 1.3rem 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #E9EEF6;
+        }
+
+        .section-head {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--indigo-700);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 3px solid var(--indigo-500);
+            padding-left: 0.8rem;
+        }
+
+        .job-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .job-title {
+            font-weight: 700;
+            color: #10182F;
+        }
+
+        .job-date {
+            font-size: 0.7rem;
+            background: #EEF2FF;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #1E2F6E;
+        }
+
+        .company {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--indigo-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .desc-list {
+            padding-left: 1.2rem;
+            font-size: 0.85rem;
+            color: #2C3A5E;
+            line-height: 1.45;
+        }
+
+        .desc-list li {
+            margin-bottom: 0.35rem;
+        }
+
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill {
+            background: #F1F4FD;
+            color: #102451;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .info-tag-sm {
+            background: #F1F4FD;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .divider-light {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #DFE6F0, transparent);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5B6E8C;
+            border-top: 1px solid #E9EDF4;
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        a {
+            transition: opacity 0.2s;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="hero">
+            <div class="flex-header">
+                <div class="name-title">
+                    <h1>Диев Арсений<br>Анатольевич</h1>
+                    <div class="badge-role"><i class="fas fa-bolt"></i> Монтажник слаботочных систем</div>
+                </div>
+                <div class="salary-box">
+                    <div class="big">100 000 ₽</div>
+                    <div class="small">желаемая зарплата / месяц</div>
+                </div>
+            </div>
+
+            <div class="contact-row">
+                <div class="contact-pill"><i class="fas fa-envelope"></i> <a href="mailto:arsenii-diev@gmail.com">arsenii-diev@gmail.com</a></div>
+                <div class="contact-pill"><i class="fas fa-phone-alt"></i> <a href="tel:+79535148767">+7 953 514-87-67</a></div>
+                <div class="contact-pill"><i class="fas fa-map-marker-alt"></i> Вологда / переезд возможен</div>
+                <div class="contact-pill"><i class="fas fa-briefcase"></i> Полная занятость</div>
+                <div class="contact-pill"><i class="fas fa-plane"></i> Командировки: да</div>
+            </div>
+
+            <!-- МЕССЕНДЖЕРЫ: ссылки строго по заданию -->
+            <div class="messenger-strip">
+                <a href="https://web.telegram.org/" target="_blank" class="messenger-link" title="Telegram"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="https://whatsapp.com/" target="_blank" class="messenger-link" title="WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://www.viber.com/ru/" target="_blank" class="messenger-link" title="Viber"><i class="fab fa-viber"></i> Viber</a>
+                <a href="https://vk.com/" target="_blank" class="messenger-link" title="ВКонтакте"><i class="fab fa-vk"></i> ВКонтакте</a>
+                <a href="https://max.ru/" target="_blank" class="messenger-link" title="Max"><i class="fas fa-star"></i> Max</a>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat"><i class="fas fa-calendar-alt"></i> 20 лет (02.05.2006)</div>
+                <div class="stat"><i class="fas fa-flag-checkered"></i> Гражданство РФ</div>
+                <div class="stat"><i class="fas fa-heart"></i> Холост, детей нет</div>
+                <div class="stat"><i class="fas fa-city"></i> Переезд возможен</div>
+            </div>
+        </div>
+
+        <div class="content-inner">
+            <div class="grid-2">
+                <!-- Левая колонка: образование + опыт -->
+                <div>
+                    <!-- Образование -->
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-graduation-cap"></i> Образование</div>
+                        <div class="job-block">
+                            <div class="job-header">
+                                <span class="job-title">Вологодский колледж связи и ИТ</span>
+                                <span class="job-date">2026</span>
+                            </div>
+                            <div class="company">Факультет ИКС</div>
+                            <div style="font-size: 0.85rem; margin-top: 4px;">Специальность: Инфокоммуникационные сети и системы связи</div>
+                            <div style="font-size: 0.8rem; color:#5B6E8C;">Очная форма · диплом 2026 г.</div>
+                        </div>
+                    </div>
+
+                    <!-- Опыт работы -->
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-briefcase"></i> Опыт работы</div>
+                        <!-- Фосагро (дата 11.11.2025 — 09.05.2025) -->
+                        <div class="job-block">
+                            <div class="job-header">
+                                <span class="job-title">Монтажник слаботочных систем</span>
+                                <span class="job-date">11.11.2025 — 09.05.2025</span>
+                            </div>
+                            <div class="company">Инжиниринговый центр Фосагро (АО «ФосАгро»)</div>
+                            <ul class="desc-list">
+                                <li>Монтаж СКС, видеонаблюдения, охранной сигнализации, СКУД по проектной документации и ПУЭ.</li>
+                                <li>Разделка кабеля, обжим RJ-45, монтаж розеток, патч-панелей, телекоммуникационных стоек.</li>
+                                <li>Участие в пуско-наладочных работах: прозвонка, измерения затухания и NEXT тестером Fluke Networks.</li>
+                                <li>Прокладка более 2,5 км медного и оптического кабеля в лотках, коробах, под фальшполом.</li>
+                                <li>Смонтировал 120+ IP-камер, 50 считывателей, 30 датчиков — без дефектов по ОТК.</li>
+                                <li>Соблюдение промышленной безопасности, работа на высоте до 6 м, оформление исполнительной документации.</li>
+                            </ul>
+                            <div class="info-tag-sm" style="margin-top: 8px;"><i class="fas fa-file-signature"></i> Причина ухода: окончание срочного договора</div>
+                        </div>
+                        <!-- Лаборант -->
+                        <div class="job-block">
+                            <div class="job-header">
+                                <span class="job-title">Лаборант мастерских</span>
+                                <span class="job-date">апрель 2025 — настоящее время</span>
+                            </div>
+                            <div class="company">Вологодский колледж связи и информационных технологий</div>
+                            <ul class="desc-list">
+                                <li>Помощь преподавателям в проведении демонстрационных экспериментов и аттестационных работ.</li>
+                                <li>Подготовка лабораторного оборудования, настройка, калибровка, мелкий ремонт.</li>
+                                <li>Актуализация методических материалов и схем подключения для лабораторных работ.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: навыки, языки, доп. информация, ссылки -->
+                <div>
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-microchip"></i> Ключевые навыки</div>
+                        <div class="skills-wrapper">
+                            <span class="skill">СКС / Видеонаблюдение</span>
+                            <span class="skill">Обжим RJ-45/RJ-12</span>
+                            <span class="skill">Fluke Networks / Прозвонка</span>
+                            <span class="skill">Hikvision, Dahua, RVI</span>
+                            <span class="skill">Чтение электросхем</span>
+                            <span class="skill">AutoCAD (чтение)</span>
+                            <span class="skill">Настройка VLAN / Telnet</span>
+                            <span class="skill">Пайка, разделка оптики</span>
+                            <span class="skill">MS Office (Excel, Word)</span>
+                            <span class="skill">Работа с перфоратором, дрелью</span>
+                            <span class="skill">Охрана труда, высота до 6 м</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-language"></i> Языки и медкнижка</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.7rem;">
+                            <span class="info-tag-sm"><i class="fas fa-comment"></i> Русский — родной</span>
+                            <span class="info-tag-sm"><i class="fas fa-globe"></i> Английский — технический (чтение)</span>
+                            <span class="info-tag-sm"><i class="fas fa-notes-medical"></i> Медицинская книжка: есть</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-info-circle"></i> Дополнительная информация</div>
+                        <ul class="desc-list">
+                            <li>Работа с тестерами кабельных линий (Fluke, Trend Networks) — затухание, NEXT, прозвонка.</li>
+                            <li>Навыки чтения ПО для проектирования СКС (трассы, спецификации).</li>
+                            <li>Ведение исполнительной документации, актов скрытых работ, журналов учёта.</li>
+                            <li>Соблюдение правил охраны труда при работе в действующих цехах.</li>
+                            <li>Ответственность, обучаемость, опыт работы в команде и с заказчиком.</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="section-head"><i class="fas fa-link"></i> Проекты / Ссылки</div>
+                        <div style="margin-bottom: 6px;"><i class="fas fa-building"></i> <a href="https://www.phosagro.ru/about/it/" target="_blank" style="color: var(--indigo-500); text-decoration: none; border-bottom: 1px dashed #8DA0C0;">Инжиниринговый центр ФосАгро</a></div>
+                        <div><i class="fas fa-graduation-cap"></i> <a href="https://spo35-vksiit.gosuslugi.ru/" target="_blank" style="color: var(--indigo-500); text-decoration: none; border-bottom: 1px dashed #8DA0C0;">Вологодский колледж связи и ИТ</a></div>
+                        <hr class="divider-light">
+                        <div><i class="fas fa-check-circle" style="color: #1f6e43;"></i> Готовность к командировкам, оперативному выезду на объекты.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-note">
+                <i class="fas fa-id-card"></i> Арсений Диев — монтаж слаботочных систем, пусконаладка | Почта: arsenii-diev@gmail.com | Тел: +7 953 514-87-67
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
