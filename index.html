@@ -2,9 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Витая пара — модуль курса</title>
 <style>
+    * { box-sizing: border-box; }
     html, body {
         margin: 0;
         padding: 0;
@@ -12,18 +13,282 @@
     }
     body {
         font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-        padding: 16px 8px;
+        padding: 8px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #1f2a33;
+    }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 4px;
+        background: #ffffff;
+    }
+    .hero {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 32px 20px 28px;
+        background: linear-gradient(135deg,#e8f6fa 0%,#f4fbfd 45%,#ffffff 100%);
+        margin-bottom: 16px;
+        border: 1px solid #c8e4ee;
+    }
+    .hero h1 {
+        position: relative;
+        z-index: 5;
+        margin: 0 0 12px;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: -.5px;
+        line-height: 1.1;
+        color: #12385c;
+        max-width: 100%;
+    }
+    .hero p {
+        position: relative;
+        z-index: 5;
+        color: #4a6a80;
+        font-size: 14px;
+        margin: 0;
+        max-width: 100%;
+        line-height: 1.6;
+    }
+    .hero-badge {
+        position: relative;
+        z-index: 5;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 6px;
+        background: #e8f6fa;
+        border: 1px solid #4ad0e0;
+        color: #1e6091;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        font-family: 'Consolas','Courier New',monospace;
+    }
+    .hero-tags {
+        position: relative;
+        z-index: 5;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-family: 'Consolas','Courier New',monospace;
+        font-size: 10px;
+        color: #4a6a80;
+    }
+    .hero-tags span {
+        border: 1px solid #c8e4ee;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #ffffff;
+    }
+    /* Скрываем декоративные SVG в шапке на мобильных */
+    .hero svg.decor {
+        display: none;
+    }
+    .section {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 20px 16px;
+        border: 1px solid #d8e6f0;
+        box-shadow: 0 4px 20px rgba(30,96,145,.06);
+        margin-bottom: 16px;
+    }
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+    }
+    .section-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px rgba(30,96,145,.3);
+        flex-shrink: 0;
+    }
+    .section-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #12385c;
+    }
+    .section-sub {
+        font-size: 10px;
+        color: #6f93a0;
+        letter-spacing: 2px;
+        font-family: 'Consolas','Courier New',monospace;
+    }
+    .text {
+        font-size: 14px;
+        color: #3d5568;
+        line-height: 1.75;
+        margin: 0 0 12px;
+        text-align: justify;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .card {
+        background: #ffffff;
+        border: 1px solid #e2ecf4;
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+    .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 12px;
+    }
+    .table-wrap table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        min-width: 600px;
+    }
+    .table-wrap th,
+    .table-wrap td {
+        padding: 8px;
+        border-bottom: 1px solid #e2ecf4;
+        text-align: left;
+    }
+    .table-wrap th {
+        background: #f5f9fc;
+        color: #12385c;
+        font-weight: 800;
+        border-bottom: 2px solid #c8e4ee;
+    }
+    .table-wrap tr:last-child td {
+        border-bottom: none;
+    }
+    .note {
+        background: #f5f9fc;
+        border-left: 4px solid #4ad0e0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-top: 14px;
+        font-size: 13px;
+        color: #3d5568;
+    }
+    .note b {
+        color: #1e6091;
+    }
+    .color-strip {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+    .color-strip div {
+        width: 32px;
+        height: 24px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+    .scheme-row {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+    .scheme-row > div {
+        text-align: center;
+        flex: 0 0 auto;
+    }
+    .scheme-row .swatch {
+        width: 36px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    .scheme-row .num {
+        font-size: 9px;
+        color: #6f93a0;
+        font-family: 'Consolas',monospace;
+        margin-top: 2px;
+    }
+    @media (min-width: 600px) {
+        .container { padding: 8px; }
+        .hero { padding: 52px 36px 44px; }
+        .hero h1 { font-size: 38px; }
+        .hero p { font-size: 15.5px; }
+        .hero-badge { font-size: 11px; padding: 8px 16px; }
+        .hero-tags { font-size: 11.5px; }
+        .hero svg.decor { display: block; }
+        .section { padding: 32px 28px; }
+        .section-title { font-size: 26px; }
+        .text { font-size: 14.5px; }
+        .grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .card { padding: 16px 18px; }
+        .table-wrap table { font-size: 13px; min-width: 700px; }
+        .scheme-row .swatch { width: 44px; height: 34px; }
+    }
+    /* Анимации */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseCard {
+        0% { box-shadow: 0 0 0 0 rgba(224,160,80,0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(224,160,80,0); }
+        100% { box-shadow: 0 0 0 0 rgba(224,160,80,0); }
+    }
+    @keyframes bounceIn {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    @keyframes rowHighlight {
+        0%, 100% { background-color: #ffffff; }
+        50% { background-color: #f5f9fc; }
+    }
+    @keyframes shieldPulse {
+        0%, 100% { box-shadow: 0 4px 20px rgba(30,96,145,.06); }
+        50% { box-shadow: 0 4px 20px rgba(30,96,145,.2); }
+    }
+    @keyframes contactBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+    @keyframes floatCard {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+    @keyframes boltPulse {
+        0% { box-shadow: 0 0 0 0 rgba(224,160,80,0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(224,160,80,0); }
+        100% { box-shadow: 0 0 0 0 rgba(224,160,80,0); }
+    }
+    @keyframes sway {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(1deg); }
+        75% { transform: rotate(-1deg); }
+    }
+    /* Скрываем декоративные элементы на очень маленьких экранах */
+    @media (max-width: 400px) {
+        .hero h1 { font-size: 24px; }
+        .section-title { font-size: 20px; }
     }
 </style>
 </head>
 <body>
 
-<div style="font-family:'Segoe UI',Roboto,Arial,sans-serif;max-width:900px;margin:0 auto;color:#1f2a33;background:#ffffff;padding:8px;line-height:1.6;">
+<div class="container">
 
     <!-- ==================== ШАПКА ==================== -->
-    <div style="position:relative;border-radius:16px;overflow:hidden;padding:52px 36px 44px;background:linear-gradient(135deg,#e8f6fa 0%,#f4fbfd 45%,#ffffff 100%);margin-bottom:24px;border:1px solid #c8e4ee;">
-
-        <svg viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.6;">
+    <div class="hero">
+        <!-- Декоративные SVG (скрыты на мобильных через CSS) -->
+        <svg class="decor" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.6;">
             <defs>
                 <linearGradient id="tpPairA" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stop-color="#a8e6f0"></stop>
@@ -85,7 +350,7 @@
             </g>
         </svg>
 
-        <svg viewBox="0 0 240 240" style="position:absolute;right:-24px;top:50%;transform:translateY(-50%);width:220px;height:220px;opacity:0.92;">
+        <svg class="decor" viewBox="0 0 240 240" style="position:absolute;right:-24px;top:50%;transform:translateY(-50%);width:220px;height:220px;opacity:0.92;">
             <defs>
                 <radialGradient id="tpBadge" cx="50%" cy="50%">
                     <stop offset="0%" stop-color="#d6c2f0"></stop>
@@ -115,93 +380,93 @@
             <text x="120" y="134" text-anchor="middle" fill="#e9d5ff" font-family="'Consolas','Courier New',monospace" font-size="9" font-weight="700">4 ПАРЫ · 8 ЖИЛ</text>
         </svg>
 
-        <div style="position:relative;z-index:5;display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:6px;background:#e8f6fa;border:1px solid #4ad0e0;color:#1e6091;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;font-family:'Consolas','Courier New',monospace;">
+        <div class="hero-badge">
             <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ac070;box-shadow:0 0 8px #4ac070;"></span>
             МОДУЛЬ · КАБЕЛЬНЫЕ СИСТЕМЫ
         </div>
 
-        <h1 style="position:relative;z-index:5;margin:0 0 16px;font-size:38px;font-weight:900;letter-spacing:-.5px;line-height:1.08;color:#12385c;max-width:560px;">
+        <h1>
             ВИТАЯ ПАРА<br>
             <span style="background:linear-gradient(90deg,#1e6091,#2a9a5a,#7a4ac0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">МЕДНЫЙ ФУНДАМЕНТ СЕТЕЙ</span>
         </h1>
 
-        <p style="position:relative;z-index:5;color:#4a6a80;font-size:15.5px;margin:0;max-width:540px;line-height:1.65;">
+        <p>
             Что это такое, зачем провода скручивают между собой, какие бывают категории
             и экраны, как обжимать разъёмы и почему «витуха» до сих пор остаётся главным
             кабелем офиса, квартиры и ЦОД.
         </p>
 
-        <div style="position:relative;z-index:5;margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;font-family:'Consolas','Courier New',monospace;font-size:11.5px;color:#4a6a80;">
-            <span style="border:1px solid #c8e4ee;padding:6px 12px;border-radius:4px;background:#ffffff;">UTP · FTP · STP · S/FTP</span>
-            <span style="border:1px solid #dccdf0;padding:6px 12px;border-radius:4px;background:#ffffff;">Cat 5e · Cat 6 · Cat 6a · Cat 8</span>
-            <span style="border:1px solid #c8ecd4;padding:6px 12px;border-radius:4px;background:#ffffff;">RJ-45 · T568A · T568B · PoE</span>
+        <div class="hero-tags">
+            <span>UTP · FTP · STP · S/FTP</span>
+            <span>Cat 5e · Cat 6 · Cat 6a · Cat 8</span>
+            <span>RJ-45 · T568A · T568B · PoE</span>
         </div>
     </div>
 
 
     <!-- ==================== СЛОВАРЬ ==================== -->
-    <div style="background:linear-gradient(135deg,#f5f9fc,#ffffff);border-radius:16px;padding:26px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(30,96,145,.08);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#94a8b8,#4a6a80);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(74,106,128,.3);">🔤</div>
+    <div class="section" style="background:linear-gradient(135deg,#f5f9fc,#ffffff);border-color:#d8e6f0;">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#94a8b8,#4a6a80);">🔤</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">СЛОВАРЬ ТЕРМИНОВ</div>
-                <div style="font-size:22px;font-weight:800;color:#12385c;">Расшифровка ключевых обозначений</div>
+                <div class="section-sub">СЛОВАРЬ ТЕРМИНОВ</div>
+                <div class="section-title">Расшифровка ключевых обозначений</div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;">
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+        <div class="grid">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">Витая пара</b> — <span style="color:#4a6a80;font-size:13px;">две изолированные медные жилы, скрученные между собой с определённым шагом</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">UTP</b> — <span style="color:#4a6a80;font-size:13px;">Unshielded Twisted Pair — неэкранированная витая пара</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">FTP / F/UTP</b> — <span style="color:#4a6a80;font-size:13px;">Foiled Twisted Pair — общий алюминиевый экран-фольга вокруг всех пар</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">STP / S/UTP</b> — <span style="color:#4a6a80;font-size:13px;">Shielded Twisted Pair — общий экран из медной оплётки</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">S/FTP</b> — <span style="color:#4a6a80;font-size:13px;">Screened Foiled Twisted Pair — экран на каждой паре + общая оплётка</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#1e6091;font-family:'Consolas','Courier New',monospace;">RJ-45 (8P8C)</b> — <span style="color:#4a6a80;font-size:13px;">8 Position 8 Contact — восьмиконтактный разъём для витой пары</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#7a4ac0;font-family:'Consolas','Courier New',monospace;">T568A / T568B</b> — <span style="color:#5a4a75;font-size:13px;">два стандарта раскладки жил по контактам разъёма</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#7a4ac0;font-family:'Consolas','Courier New',monospace;">NEXT</b> — <span style="color:#5a4a75;font-size:13px;">Near-End Crosstalk — перекрёстная наводка на ближнем конце</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#7a4ac0;font-family:'Consolas','Courier New',monospace;">FEXT</b> — <span style="color:#5a4a75;font-size:13px;">Far-End Crosstalk — перекрёстная наводка на дальнем конце</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#2a9a5a;font-family:'Consolas','Courier New',monospace;">PoE</b> — <span style="color:#3d6a4d;font-size:13px;">Power over Ethernet — питание устройств по тому же кабелю, что и данные</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#2a9a5a;font-family:'Consolas','Courier New',monospace;">ЛВС</b> — <span style="color:#3d6a4d;font-size:13px;">локальная вычислительная сеть (LAN — Local Area Network)</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#2a9a5a;font-family:'Consolas','Courier New',monospace;">AWG</b> — <span style="color:#3d6a4d;font-size:13px;">American Wire Gauge — американская маркировка сечения жилы (24 AWG ≈ 0,51 мм)</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;">Патч-корд</b> — <span style="color:#7a6030;font-size:13px;">готовый отрезок кабеля с разъёмами на обоих концах</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;">Кроссировка</b> — <span style="color:#7a6030;font-size:13px;">коммутация портов на патч-панели и коммутаторе патч-кордами</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;">LSZH</b> — <span style="color:#7a6030;font-size:13px;">Low Smoke Zero Halogen — оболочка без галогенов, не дымит при горении</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#c04060;font-family:'Consolas','Courier New',monospace;">ЦОД</b> — <span style="color:#7a4055;font-size:13px;">центр обработки данных (data center)</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#c04060;font-family:'Consolas','Courier New',monospace;">ЭМИ</b> — <span style="color:#7a4055;font-size:13px;">электромагнитное излучение (помехи от силовых линий и техники)</span>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;padding:12px 14px;">
+            <div class="card" style="border-color:#e2ecf4;">
                 <b style="color:#c04060;font-family:'Consolas','Courier New',monospace;">Auto-MDIX</b> — <span style="color:#7a4055;font-size:13px;">автоматическое определение типа порта, отменяет необходимость кросс-кабеля</span>
             </div>
         </div>
@@ -209,32 +474,32 @@
 
 
     <!-- ==================== ЧТО ВЫ УЗНАЕТЕ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(30,96,145,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ad0e0,#1e6091);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,96,145,.3);">🎯</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ad0e0,#1e6091);">🎯</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">ЦЕЛИ ОБУЧЕНИЯ</div>
-                <div style="font-size:26px;font-weight:800;color:#12385c;">Что вы узнаете из модуля</div>
+                <div class="section-sub">ЦЕЛИ ОБУЧЕНИЯ</div>
+                <div class="section-title">Что вы узнаете из модуля</div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-            <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-left:4px solid #1e6091;border-radius:12px;padding:16px 18px;">
+        <div class="grid">
+            <div class="card" style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border-color:#c8e4ee;border-left:4px solid #1e6091;animation:fadeInUp 1s ease both;">
                 <div style="font-size:24px;margin-bottom:8px;">🧬</div>
                 <div style="font-size:13.5px;font-weight:800;color:#12385c;margin-bottom:4px;">Устройство кабеля</div>
                 <div style="font-size:12.5px;color:#4a6a80;line-height:1.5;">Из чего состоит витая пара и зачем жилы скручивают</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:12px;padding:16px 18px;">
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;border-left:4px solid #2a9a5a;animation:fadeInUp 1s .2s ease both;">
                 <div style="font-size:24px;margin-bottom:8px;">📊</div>
                 <div style="font-size:13.5px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">Категории</div>
                 <div style="font-size:12.5px;color:#3d6a4d;line-height:1.5;">От Cat 1 до Cat 8.2: частоты, скорости, дальность</div>
             </div>
-            <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-left:4px solid #7a4ac0;border-radius:12px;padding:16px 18px;">
+            <div class="card" style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border-color:#dccdf0;border-left:4px solid #7a4ac0;animation:fadeInUp 1s .4s ease both;">
                 <div style="font-size:24px;margin-bottom:8px;">🛡️</div>
                 <div style="font-size:13.5px;font-weight:800;color:#5a2a90;margin-bottom:4px;">Экранирование</div>
                 <div style="font-size:12.5px;color:#5a4a75;line-height:1.5;">UTP, FTP, STP, S/FTP — что и от чего защищает</div>
             </div>
-            <div style="background:linear-gradient(160deg,#fff8ec,#ffffff);border:1px solid #f0dcb8;border-left:4px solid #e0a050;border-radius:12px;padding:16px 18px;">
+            <div class="card" style="background:linear-gradient(160deg,#fff8ec,#ffffff);border-color:#f0dcb8;border-left:4px solid #e0a050;animation:fadeInUp 1s .6s ease both;">
                 <div style="font-size:24px;margin-bottom:8px;">🔌</div>
                 <div style="font-size:13.5px;font-weight:800;color:#8a5a10;margin-bottom:4px;">Монтаж</div>
                 <div style="font-size:12.5px;color:#7a6030;line-height:1.5;">RJ-45, схемы T568A/B, правила прокладки и тестирование</div>
@@ -244,28 +509,28 @@
 
 
     <!-- ==================== РАЗДЕЛ 1 ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(30,96,145,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ad0e0,#1e6091);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,96,145,.3);">📖</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ad0e0,#1e6091);">📖</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 1</div>
-                <div style="font-size:26px;font-weight:800;color:#12385c;">Что такое витая пара</div>
+                <div class="section-sub">РАЗДЕЛ 1</div>
+                <div class="section-title">Что такое витая пара</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 14px;text-align:justify;">
+        <p class="text">
             <b style="color:#1e6091;">Витая пара</b> <span style="color:#6f93a0;font-size:0.92em;">(twisted pair)</span> — вид кабеля связи, представляет собой одну или несколько пар изолированных проводников, скрученных между собой (с небольшим числом витков на единицу длины), покрытых пластиковой оболочкой.
         </p>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Витая пара — один из компонентов современных структурированных кабельных систем. Используется в телекоммуникациях и в компьютерных сетях в качестве физической среды передачи сигнала во многих технологиях, например, таких как Ethernet.
         </p>
 
-        <!-- Устройство кабеля: 4 пары с правильными цветами и штриховкой -->
-        <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-radius:12px;padding:20px;margin-bottom:18px;">
-            <div style="font-family:'Consolas','Courier New',monospace;font-size:11px;color:#6f93a0;letter-spacing:2px;margin-bottom:16px;">УСТРОЙСТВО СЕТЕВОГО КАБЕЛЯ UTP Cat 5e — 4 ПАРЫ</div>
+        <!-- Устройство кабеля: 4 пары с правильными цветами и штриховкой (без анимации бегущей точки) -->
+        <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-radius:12px;padding:12px;margin-bottom:14px;overflow-x:auto;">
+            <div style="font-family:'Consolas','Courier New',monospace;font-size:10px;color:#6f93a0;letter-spacing:2px;margin-bottom:12px;">УСТРОЙСТВО СЕТЕВОГО КАБЕЛЯ UTP Cat 5e — 4 ПАРЫ</div>
 
-            <svg viewBox="0 0 820 260" style="width:100%;height:auto;display:block;">
+            <svg viewBox="0 0 820 260" style="width:100%;min-width:500px;height:auto;display:block;">
                 <!-- Оболочка -->
                 <rect x="20" y="15" width="790" height="230" rx="40" fill="#f5f9fc" stroke="#c8e4ee" stroke-width="2"></rect>
 
@@ -289,12 +554,6 @@
                 <path d="M 130 220 Q 170 235 210 220 T 290 220 T 370 220 T 450 220 T 530 220 T 610 220 T 690 220 T 770 220" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.9"></path>
                 <path d="M 130 220 Q 170 235 210 220 T 290 220 T 370 220 T 450 220 T 530 220 T 610 220 T 690 220 T 770 220" fill="none" stroke="#7a4a20" stroke-width="6" stroke-dasharray="12 12" stroke-linecap="butt" opacity="0.9"></path>
 
-                <!-- Бегущая точка по паре 1 -->
-                <circle r="5" fill="#1e6091">
-                    <animateMotion dur="5s" repeatCount="indefinite" path="M 130 55 Q 170 40 210 55 T 290 55 T 370 55 T 450 55 T 530 55 T 610 55 T 690 55 T 770 55"></animateMotion>
-                    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite"></animate>
-                </circle>
-
                 <!-- Подписи слева -->
                 <text x="105" y="59" text-anchor="end" fill="#2a6ac0" font-family="'Segoe UI',sans-serif" font-size="11" font-weight="800">Пара 1</text>
                 <text x="105" y="114" text-anchor="end" fill="#e07b1a" font-family="'Segoe UI',sans-serif" font-size="11" font-weight="800">Пара 2</text>
@@ -303,265 +562,259 @@
             </svg>
 
             <!-- Легенда цветов -->
-            <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;font-size:11.5px;">
-                <div style="background:#ffffff;border:1px solid #9ec5ef;border-radius:6px;padding:6px 10px;color:#2a6ac0;"><b>Пара 1</b> — синяя / бело-синяя (штрих)</div>
-                <div style="background:#ffffff;border:1px solid #f5c088;border-radius:6px;padding:6px 10px;color:#e07b1a;"><b>Пара 2</b> — оранжевая / бело-оранжевая (штрих)</div>
-                <div style="background:#ffffff;border:1px solid #9ad9a8;border-radius:6px;padding:6px 10px;color:#2a9a5a;"><b>Пара 3</b> — зелёная / бело-зелёная (штрих)</div>
-                <div style="background:#ffffff;border:1px solid #d0b090;border-radius:6px;padding:6px 10px;color:#7a4a20;"><b>Пара 4</b> — коричневая / бело-коричневая (штрих)</div>
+            <div style="margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;font-size:11px;">
+                <div style="background:#ffffff;border:1px solid #9ec5ef;border-radius:6px;padding:4px 8px;color:#2a6ac0;"><b>Пара 1</b> — синяя / бело-синяя (штрих)</div>
+                <div style="background:#ffffff;border:1px solid #f5c088;border-radius:6px;padding:4px 8px;color:#e07b1a;"><b>Пара 2</b> — оранжевая / бело-оранжевая (штрих)</div>
+                <div style="background:#ffffff;border:1px solid #9ad9a8;border-radius:6px;padding:4px 8px;color:#2a9a5a;"><b>Пара 3</b> — зелёная / бело-зелёная (штрих)</div>
+                <div style="background:#ffffff;border:1px solid #d0b090;border-radius:6px;padding:4px 8px;color:#7a4a20;"><b>Пара 4</b> — коричневая / бело-коричневая (штрих)</div>
             </div>
 
-            <div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;font-size:12px;color:#4a6a80;">
-                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:8px 10px;"><b style="color:#1e6091;">4 пары</b> — 8 медных жил</div>
-                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:8px 10px;"><b style="color:#2a9a5a;">Шаг скрутки</b> — разный у каждой пары</div>
-                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:8px 10px;"><b style="color:#7a4ac0;">Оболочка</b> — ПВХ, PE или LSZH</div>
-                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:8px 10px;"><b style="color:#c04060;">Цвета пар</b> — по стандарту T568B</div>
+            <div style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;font-size:11px;color:#4a6a80;">
+                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:4px 8px;"><b style="color:#1e6091;">4 пары</b> — 8 медных жил</div>
+                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:4px 8px;"><b style="color:#2a9a5a;">Шаг скрутки</b> — разный у каждой пары</div>
+                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:4px 8px;"><b style="color:#7a4ac0;">Оболочка</b> — ПВХ, PE или LSZH</div>
+                <div style="background:#ffffff;border:1px solid #e2ecf4;border-radius:6px;padding:4px 8px;"><b style="color:#c04060;">Цвета пар</b> — по стандарту T568B</div>
             </div>
         </div>
 
-        <div style="background:#f5f9fc;border-left:4px solid #4ad0e0;border-radius:10px;padding:14px 18px;">
-            <div style="font-weight:800;color:#1e6091;margin-bottom:6px;font-size:12px;letter-spacing:.5px;font-family:'Consolas','Courier New',monospace;">ЗАПОМНИТЕ</div>
-            <div style="font-size:13.5px;color:#3d5568;line-height:1.6;">Витая пара — это <b>симметричная</b> линия: обе жилы пары абсолютно одинаковы, и сигнал передаётся как разность потенциалов между ними. Именно это делает кабель устойчивым к помехам.</div>
+        <div class="note">
+            <b>ЗАПОМНИТЕ</b><br>
+            Витая пара — это <b>симметричная</b> линия: обе жилы пары абсолютно одинаковы, и сигнал передаётся как разность потенциалов между ними. Именно это делает кабель устойчивым к помехам.
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(42,154,90,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ac070,#2a9a5a);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(42,154,90,.3);">🌀</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ac070,#2a9a5a);">🌀</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 2</div>
-                <div style="font-size:26px;font-weight:800;color:#1a6a3a;">Зачем провода скручивают?</div>
+                <div class="section-sub">РАЗДЕЛ 2</div>
+                <div class="section-title">Зачем провода скручивают?</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 16px;text-align:justify;">
+        <p class="text">
             Свивание проводников производится с целью повышения степени связи между собой проводников одной пары (электромагнитные помехи одинаково влияют на оба провода пары) и последующего уменьшения электромагнитных помех от внешних источников, а также взаимных наводок при передаче дифференциальных сигналов.
         </p>
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Для снижения связи отдельных пар кабеля (периодического сближения проводников различных пар) в кабелях UTP категории 5 и выше провода пары свиваются с различным шагом.
         </p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:16px;">
-            <div style="background:linear-gradient(160deg,#ffeef2,#ffffff);border:1px solid #f0cdd6;border-left:4px solid #c04060;border-radius:12px;padding:18px;">
-                <div style="font-size:13px;font-weight:800;color:#8a2040;margin-bottom:8px;font-family:'Consolas','Courier New',monospace;">БЕЗ СКРУТКИ</div>
+        <div class="grid" style="margin-bottom:14px;">
+            <div style="background:linear-gradient(160deg,#ffeef2,#ffffff);border:1px solid #f0cdd6;border-left:4px solid #c04060;border-radius:12px;padding:12px;">
+                <div style="font-size:12px;font-weight:800;color:#8a2040;margin-bottom:6px;font-family:'Consolas','Courier New',monospace;">БЕЗ СКРУТКИ</div>
                 <svg viewBox="0 0 260 90" style="width:100%;height:auto;display:block;">
                     <line x1="20" y1="30" x2="240" y2="30" stroke="#c04060" stroke-width="3" stroke-linecap="round"></line>
                     <line x1="20" y1="60" x2="240" y2="60" stroke="#e08a9a" stroke-width="3" stroke-linecap="round"></line>
-                    <path d="M 70 12 l 10 12 l -10 12" fill="none" stroke="#c04060" stroke-width="1.8" opacity="0.7"></path>
-                    <path d="M 130 12 l 10 12 l -10 12" fill="none" stroke="#c04060" stroke-width="1.8" opacity="0.7"></path>
-                    <path d="M 190 12 l 10 12 l -10 12" fill="none" stroke="#c04060" stroke-width="1.8" opacity="0.7"></path>
+                    <path d="M 20 30 Q 40 15 60 30 T 100 30 T 140 30 T 180 30 T 220 30 T 240 30" fill="none" stroke="#c04060" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.7">
+                        <animate attributeName="stroke-dashoffset" from="10" to="0" dur="1s" repeatCount="indefinite"></animate>
+                    </path>
+                    <path d="M 20 60 Q 40 75 60 60 T 100 60 T 140 60 T 180 60 T 220 60 T 240 60" fill="none" stroke="#e08a9a" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.7">
+                        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"></animate>
+                    </path>
                     <text x="130" y="86" text-anchor="middle" fill="#8a2040" font-size="10" font-family="'Consolas',monospace">помеха наводится по-разному</text>
                 </svg>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:12px;padding:18px;">
-                <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:8px;font-family:'Consolas','Courier New',monospace;">СО СКРУТКОЙ</div>
+            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:12px;padding:12px;">
+                <div style="font-size:12px;font-weight:800;color:#1a6a3a;margin-bottom:6px;font-family:'Consolas','Courier New',monospace;">СО СКРУТКОЙ</div>
                 <svg viewBox="0 0 260 90" style="width:100%;height:auto;display:block;">
                     <path d="M 20 45 Q 35 20 50 45 T 80 45 T 110 45 T 140 45 T 170 45 T 200 45 T 230 45 T 260 45" fill="none" stroke="#2a9a5a" stroke-width="3" stroke-linecap="round"></path>
                     <path d="M 20 45 Q 35 70 50 45 T 80 45 T 110 45 T 140 45 T 170 45 T 200 45 T 230 45 T 260 45" fill="none" stroke="#4ac070" stroke-width="3" stroke-linecap="round"></path>
-                    <path d="M 70 12 l 10 12 l -10 12" fill="none" stroke="#2a9a5a" stroke-width="1.8" opacity="0.7"></path>
-                    <path d="M 130 12 l 10 12 l -10 12" fill="none" stroke="#2a9a5a" stroke-width="1.8" opacity="0.7"></path>
-                    <path d="M 190 12 l 10 12 l -10 12" fill="none" stroke="#2a9a5a" stroke-width="1.8" opacity="0.7"></path>
+                    <path d="M 20 45 Q 35 20 50 45 T 80 45 T 110 45 T 140 45 T 170 45 T 200 45 T 230 45 T 260 45" fill="none" stroke="#2a9a5a" stroke-width="1.5" stroke-dasharray="8 8" opacity="0.6">
+                        <animate attributeName="stroke-dashoffset" from="16" to="0" dur="1.5s" repeatCount="indefinite"></animate>
+                    </path>
                     <text x="130" y="86" text-anchor="middle" fill="#1a6a3a" font-size="10" font-family="'Consolas',monospace">наводка компенсируется</text>
                 </svg>
             </div>
         </div>
 
-        <div style="display:flex;gap:14px;align-items:flex-start;background:#eefaf1;border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
-            <div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:#2a9a5a;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;">🎯</div>
-            <div>
-                <div style="font-size:14px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">Компенсация помех</div>
-                <div style="font-size:13px;color:#3d6a4d;line-height:1.6;text-align:justify;">Приёмник реагирует только на <b>разность</b> сигналов двух жил. Внешняя наводка приходит на обе жилы почти одинаково и вычитается — полезный сигнал остаётся чистым.</div>
-            </div>
+        <div class="card" style="background:#eefaf1;border-color:#c8ecd4;border-left:4px solid #2a9a5a;margin-bottom:8px;">
+            <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">🎯 Компенсация помех</div>
+            <div style="font-size:12.5px;color:#3d6a4d;line-height:1.55;">Приёмник реагирует только на <b>разность</b> сигналов двух жил. Внешняя наводка приходит на обе жилы почти одинаково и вычитается — полезный сигнал остаётся чистым.</div>
         </div>
 
-        <div style="display:flex;gap:14px;align-items:flex-start;background:#eefaf1;border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:10px;padding:16px 20px;margin-bottom:10px;">
-            <div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:#2a9a5a;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;">🔄</div>
-            <div>
-                <div style="font-size:14px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">Разный шаг скрутки</div>
-                <div style="font-size:13px;color:#3d6a4d;line-height:1.6;text-align:justify;">У каждой из четырёх пар свой шаг скрутки — это дополнительно снижает <b>перекрёстные наводки</b> между парами в одном кабеле (NEXT/FEXT).</div>
-            </div>
+        <div class="card" style="background:#eefaf1;border-color:#c8ecd4;border-left:4px solid #2a9a5a;margin-bottom:8px;">
+            <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">🔄 Разный шаг скрутки</div>
+            <div style="font-size:12.5px;color:#3d6a4d;line-height:1.55;">У каждой из четырёх пар свой шаг скрутки — это дополнительно снижает <b>перекрёстные наводки</b> между парами в одном кабеле (NEXT/FEXT).</div>
         </div>
 
-        <div style="display:flex;gap:14px;align-items:flex-start;background:#eefaf1;border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:10px;padding:16px 20px;">
-            <div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:#2a9a5a;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;">📡</div>
-            <div>
-                <div style="font-size:14px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">Меньше излучения наружу</div>
-                <div style="font-size:13px;color:#3d6a4d;line-height:1.6;text-align:justify;">Токи в скрученных жилах текут в противоположных направлениях, их магнитные поля взаимно гасятся. Кабель меньше «фонит» и меньше ловит чужой сигнал.</div>
-            </div>
+        <div class="card" style="background:#eefaf1;border-color:#c8ecd4;border-left:4px solid #2a9a5a;">
+            <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">📡 Меньше излучения наружу</div>
+            <div style="font-size:12.5px;color:#3d6a4d;line-height:1.55;">Токи в скрученных жилах текут в противоположных направлениях, их магнитные поля взаимно гасятся. Кабель меньше «фонит» и меньше ловит чужой сигнал.</div>
         </div>
     </div>
 
     <!-- ==================== РАЗДЕЛ 3. МАРКИРОВКА ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(224,160,80,.08);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#f0b870,#e0a050);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(224,160,80,.35);">🏷️</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#f0b870,#e0a050);">🏷️</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 3</div>
-                <div style="font-size:26px;font-weight:800;color:#8a5a10;">Маркировка и конструкция</div>
+                <div class="section-sub">РАЗДЕЛ 3</div>
+                <div class="section-title">Маркировка и конструкция</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Каждый производитель может добавлять различные обозначения в зависимости от конструкции кабеля. Разберём типичную маркировку.
         </p>
 
-        <div style="background:linear-gradient(160deg,#fff8ec,#ffffff);border:1px solid #f0dcb8;border-radius:12px;padding:20px;margin-bottom:16px;">
-            <div style="font-family:'Consolas','Courier New',monospace;font-size:16px;font-weight:900;color:#8a5a10;margin-bottom:16px;text-align:center;background:#ffffff;padding:12px;border-radius:8px;border:1px dashed #e0a050;">
+        <div style="background:linear-gradient(160deg,#fff8ec,#ffffff);border:1px solid #f0dcb8;border-radius:12px;padding:12px;margin-bottom:12px;">
+            <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#8a5a10;margin-bottom:12px;text-align:center;background:#ffffff;padding:8px;border-radius:8px;border:1px dashed #e0a050;word-break:break-word;">
                 U/UTP 4 cat.5e solid 24AWG LSZH
             </div>
             
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
-                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:12px;">
-                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:12px;display:block;margin-bottom:4px;">U/UTP</b>
-                    <span style="font-size:12.5px;color:#7a6030;">Неэкранированный кабель, 4 пары.</span>
+            <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;">
+                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:8px;animation:pulseCard 3s infinite;">
+                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:11px;display:block;margin-bottom:2px;">U/UTP</b>
+                    <span style="font-size:11px;color:#7a6030;">Неэкранированный кабель, 4 пары.</span>
                 </div>
-                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:12px;">
-                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:12px;display:block;margin-bottom:4px;">cat.5e</b>
-                    <span style="font-size:12.5px;color:#7a6030;">Категория 5e (улучшенная).</span>
+                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:8px;animation:pulseCard 3s .5s infinite;">
+                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:11px;display:block;margin-bottom:2px;">cat.5e</b>
+                    <span style="font-size:11px;color:#7a6030;">Категория 5e (улучшенная).</span>
                 </div>
-                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:12px;">
-                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:12px;display:block;margin-bottom:4px;">solid</b>
-                    <span style="font-size:12.5px;color:#7a6030;">Однопроволочная (моножила).</span>
+                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:8px;animation:pulseCard 3s 1s infinite;">
+                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:11px;display:block;margin-bottom:2px;">solid</b>
+                    <span style="font-size:11px;color:#7a6030;">Однопроволочная (моножила).</span>
                 </div>
-                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:12px;">
-                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:12px;display:block;margin-bottom:4px;">24AWG</b>
-                    <span style="font-size:12.5px;color:#7a6030;">Диаметр жилы 0,51 мм.</span>
+                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:8px;animation:pulseCard 3s 1.5s infinite;">
+                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:11px;display:block;margin-bottom:2px;">24AWG</b>
+                    <span style="font-size:11px;color:#7a6030;">Диаметр жилы 0,51 мм.</span>
                 </div>
-                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:12px;">
-                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:12px;display:block;margin-bottom:4px;">LSZH</b>
-                    <span style="font-size:12.5px;color:#7a6030;">Безгалогенная оболочка с низким дымовыделением.</span>
+                <div style="background:#ffffff;border:1px solid #f0dcb8;border-radius:8px;padding:8px;animation:pulseCard 3s 2s infinite;">
+                    <b style="color:#8a5a10;font-family:'Consolas','Courier New',monospace;font-size:11px;display:block;margin-bottom:2px;">LSZH</b>
+                    <span style="font-size:11px;color:#7a6030;">Безгалогенная оболочка с низким дымовыделением.</span>
                 </div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:16px;">
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-left:4px solid #1e6091;border-radius:10px;padding:14px 16px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#1e6091;margin-bottom:6px;">Тип жилы</div>
-                <div style="font-size:12.5px;color:#3d5568;line-height:1.55;"><b>Моножила (solid)</b> — дешевле, для стационарной прокладки. <b>Многопроволочная (patch)</b> — гибкая, для патч-кордов и частых изгибов.</div>
+        <div class="grid" style="margin-bottom:12px;">
+            <div class="card" style="border-left:4px solid #1e6091;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#1e6091;margin-bottom:4px;">Тип жилы</div>
+                <div style="font-size:12px;color:#3d5568;line-height:1.55;"><b>Моножила (solid)</b> — дешевле, для стационарной прокладки. <b>Многопроволочная (patch)</b> — гибкая, для патч-кордов и частых изгибов.</div>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-left:4px solid #2a9a5a;border-radius:10px;padding:14px 16px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#1a6a3a;margin-bottom:6px;">Количество пар</div>
-                <div style="font-size:12.5px;color:#3d5568;line-height:1.55;">До 1000 пар. Для сетей — 4-парный (4x2x0,51) или 2-парный (2x2x0,51).</div>
+            <div class="card" style="border-left:4px solid #2a9a5a;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#1a6a3a;margin-bottom:4px;">Количество пар</div>
+                <div style="font-size:12px;color:#3d5568;line-height:1.55;">До 1000 пар. Для сетей — 4-парный (4x2x0,51) или 2-парный (2x2x0,51).</div>
             </div>
-            <div style="background:#ffffff;border:1px solid #e2ecf4;border-left:4px solid #7a4ac0;border-radius:10px;padding:14px 16px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#5a2a90;margin-bottom:6px;">Диаметр жилы</div>
-                <div style="font-size:12.5px;color:#3d5568;line-height:1.55;">0,4–0,64 мм. Стандарт Cat 5/6 — не менее 0,51 мм (24AWG).</div>
+            <div class="card" style="border-left:4px solid #7a4ac0;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#5a2a90;margin-bottom:4px;">Диаметр жилы</div>
+                <div style="font-size:12px;color:#3d5568;line-height:1.55;">0,4–0,64 мм. Стандарт Cat 5/6 — не менее 0,51 мм (24AWG).</div>
             </div>
         </div>
 
-        <div style="background:#f5f9fc;border:1px solid #d8e6f0;border-radius:12px;padding:18px;">
-            <div style="font-family:'Consolas','Courier New',monospace;font-size:11px;color:#6f93a0;letter-spacing:2px;margin-bottom:12px;">ТИПЫ ОБОЛОЧКИ (SHEATH)</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>PVC</b> — ПВХ (внутренняя)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>PP</b> — полипропилен (до +140°C)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>PE</b> — полиэтилен (улица)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>FR</b> — огнестойкая (30/90/180 мин)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>LS</b> — Low Smoke (низкое дымовыделение)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>ZH</b> — Zero Halogen (без галогенов)</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>B</b> — броня</span>
-                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:6px 10px;border-radius:6px;font-size:12px;color:#4a6a80;"><b>C</b> — трос</span>
+        <div style="background:#f5f9fc;border:1px solid #d8e6f0;border-radius:12px;padding:12px;">
+            <div style="font-family:'Consolas','Courier New',monospace;font-size:10px;color:#6f93a0;letter-spacing:2px;margin-bottom:8px;">ТИПЫ ОБОЛОЧКИ (SHEATH)</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s infinite;"> <b>PVC</b> — ПВХ</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s .2s infinite;"> <b>PP</b> — полипропилен</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s .4s infinite;"> <b>PE</b> — полиэтилен</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s .6s infinite;"> <b>FR</b> — огнестойкая</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s .8s infinite;"> <b>LS</b> — Low Smoke</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s 1s infinite;"> <b>ZH</b> — Zero Halogen</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s 1.2s infinite;"> <b>B</b> — броня</span>
+                <span style="background:#ffffff;border:1px solid #c8e4ee;padding:4px 8px;border-radius:6px;font-size:11px;color:#4a6a80;animation:bounceIn 2s 1.4s infinite;"> <b>C</b> — трос</span>
             </div>
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 4. КАТЕГОРИИ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(122,74,192,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#a06ae0,#7a4ac0);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(122,74,192,.3);">📊</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#a06ae0,#7a4ac0);">📊</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 4</div>
-                <div style="font-size:26px;font-weight:800;color:#5a2a90;">Таблица категорий витой пары</div>
+                <div class="section-sub">РАЗДЕЛ 4</div>
+                <div class="section-title">Таблица категорий витой пары</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Существует несколько категорий кабеля витая пара, которые нумеруются от Cat.1 до Cat.8.2 и определяют эффективный пропускаемый частотный диапазон. Кабель более высокой категории обычно содержит больше пар проводов и каждая пара имеет больше витков на единицу длины.
         </p>
 
-        <div style="overflow-x:auto;margin-bottom:16px;">
-            <table style="width:100%;border-collapse:collapse;font-size:13px;color:#3d5568;background:#ffffff;border:1px solid #e2ecf4;border-radius:8px;min-width:700px;">
+        <div class="table-wrap">
+            <table>
                 <thead>
-                    <tr style="background:#f5f9fc;color:#12385c;text-align:left;">
-                        <th style="padding:12px;border-bottom:2px solid #c8e4ee;font-weight:800;width:80px;">Категория</th>
-                        <th style="padding:12px;border-bottom:2px solid #c8e4ee;font-weight:800;width:100px;">Частоты, МГц</th>
-                        <th style="padding:12px;border-bottom:2px solid #c8e4ee;font-weight:800;width:150px;">Примечание</th>
-                        <th style="padding:12px;border-bottom:2px solid #c8e4ee;font-weight:800;">Описание</th>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Частоты, МГц</th>
+                        <th>Примечание</th>
+                        <th>Описание</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#4a6a80;">Cat.1</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">0,1 (0,4?)</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">Телефонные и старые модемные линии</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">1 пара, не описано в рекомендациях EIA/TIA для передачи данных. Используется только для передачи голоса или данных при помощи модема.</td>
+                    <tr style="animation:rowHighlight 4s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#4a6a80;">Cat.1</td>
+                        <td style="font-family:'Consolas',monospace;">0,1 (0,4?)</td>
+                        <td>Телефонные и старые модемные линии</td>
+                        <td style="font-size:11px;">1 пара, не описано в рекомендациях EIA/TIA для передачи данных. Используется только для передачи голоса или данных при помощи модема.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#4a6a80;">Cat.2</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">1 (4?)</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">Старые терминалы (IBM 3270)</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">2 пары, поддерживал до 4 Мбит/с, использовался в Token ring и Arcnet. Сейчас иногда встречается в телефонных сетях.</td>
+                    <tr style="animation:rowHighlight 4s .5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#4a6a80;">Cat.2</td>
+                        <td style="font-family:'Consolas',monospace;">1 (4?)</td>
+                        <td>Старые терминалы (IBM 3270)</td>
+                        <td style="font-size:11px;">2 пары, поддерживал до 4 Мбит/с, использовался в Token ring и Arcnet. Сейчас иногда встречается в телефонных сетях.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.3</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">16</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">10BASE-T, 100BASE-T4</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">4-парный кабель, до 10 Мбит/с (или 100 Мбит/с по 100BASE-T4) на расстояние не дальше 100 метров. Сейчас используется в основном для телефонных линий.</td>
+                    <tr style="animation:rowHighlight 4s 1s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.3</td>
+                        <td style="font-family:'Consolas',monospace;">16</td>
+                        <td>10BASE-T, 100BASE-T4</td>
+                        <td style="font-size:11px;">4-парный кабель, до 10 Мбит/с (или 100 Мбит/с по 100BASE-T4) на расстояние не дальше 100 метров. Сейчас используется в основном для телефонных линий.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.4</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">20</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">Token ring (не используется)</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">4 скрученные пары, скорость до 16 Мбит/с по одной паре. Устарел.</td>
+                    <tr style="animation:rowHighlight 4s 1.5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.4</td>
+                        <td style="font-family:'Consolas',monospace;">20</td>
+                        <td>Token ring (не используется)</td>
+                        <td style="font-size:11px;">4 скрученные пары, скорость до 16 Мбит/с по одной паре. Устарел.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.5</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">100</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">100BASE-TX</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">4-парный кабель, до 100 Мбит/с при использовании 2 пар.</td>
+                    <tr style="animation:rowHighlight 4s 2s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#1e6091;">Cat.5</td>
+                        <td style="font-family:'Consolas',monospace;">100</td>
+                        <td>100BASE-TX</td>
+                        <td style="font-size:11px;">4-парный кабель, до 100 Мбит/с при использовании 2 пар.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#2a9a5a;">Cat.5e</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">100</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">1000Base-T</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">Усовершенствованная категория 5. До 100 Мбит/с (2 пары) и до 1000 Мбит/с (4 пары). Самый распространённый кабель.</td>
+                    <tr style="animation:rowHighlight 4s 2.5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#2a9a5a;">Cat.5e</td>
+                        <td style="font-family:'Consolas',monospace;">100</td>
+                        <td>1000Base-T</td>
+                        <td style="font-size:11px;">Усовершенствованная категория 5. До 100 Мбит/с (2 пары) и до 1000 Мбит/с (4 пары). Самый распространённый кабель.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#2a9a5a;">Cat.6</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">250</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">Fast Ethernet, Gigabit Ethernet</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">Применяется в сетях Fast Ethernet и Gigabit Ethernet.</td>
+                    <tr style="animation:rowHighlight 4s 3s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#2a9a5a;">Cat.6</td>
+                        <td style="font-family:'Consolas',monospace;">250</td>
+                        <td>Fast Ethernet, Gigabit Ethernet</td>
+                        <td style="font-size:11px;">Применяется в сетях Fast Ethernet и Gigabit Ethernet.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#7a4ac0;">Cat.6a</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">500</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">10GBASE-T</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">4 пары, до 10 Гбит/с на расстояние до 55 м. Добавлен в стандарт в 2002 году.</td>
+                    <tr style="animation:rowHighlight 4s 3.5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#7a4ac0;">Cat.6a</td>
+                        <td style="font-family:'Consolas',monospace;">500</td>
+                        <td>10GBASE-T</td>
+                        <td style="font-size:11px;">4 пары, до 10 Гбит/с на расстояние до 55 м. Добавлен в стандарт в 2002 году.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#7a4ac0;">Cat.7</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">600</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">10GBASE-T</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">Экран на каждой паре + общая оплётка. Не входит в TIA/EIA-568, но широко применяется в Европе.</td>
+                    <tr style="animation:rowHighlight 4s 4s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#7a4ac0;">Cat.7</td>
+                        <td style="font-family:'Consolas',monospace;">600</td>
+                        <td>10GBASE-T</td>
+                        <td style="font-size:11px;">Экран на каждой паре + общая оплётка. Не входит в TIA/EIA-568, но широко применяется в Европе.</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#e0a050;">Cat.7a</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">до 1200</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">40GbE, 100GbE</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">До 40 Гбит/с на 50 м и до 100 Гбит/с на 15 м. Общий экран и экраны вокруг каждой пары (F/FTP или S/FTP).</td>
+                    <tr style="animation:rowHighlight 4s 4.5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#e0a050;">Cat.7a</td>
+                        <td style="font-family:'Consolas',monospace;">до 1200</td>
+                        <td>40GbE, 100GbE</td>
+                        <td style="font-size:11px;">До 40 Гбит/с на 50 м и до 100 Гбит/с на 15 м. Общий экран и экраны вокруг каждой пары (F/FTP или S/FTP).</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#c04060;">Cat.8/8.1</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">1600-2000</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">40GBASE-T</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">До 40 Гбит/с при стандартных коннекторах 8P8C. Общий экран или экраны вокруг каждой пары (F/UTP или U/FTP).</td>
+                    <tr style="animation:rowHighlight 4s 5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#c04060;">Cat.8/8.1</td>
+                        <td style="font-family:'Consolas',monospace;">1600-2000</td>
+                        <td>40GBASE-T</td>
+                        <td style="font-size:11px;">До 40 Гбит/с при стандартных коннекторах 8P8C. Общий экран или экраны вокруг каждой пары (F/UTP или U/FTP).</td>
                     </tr>
-                    <tr>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;font-weight:800;color:#c04060;">Cat.8.2</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-family:'Consolas',monospace;">1600-2000</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;">40GBASE-T</td>
-                        <td style="padding:12px;border-bottom:1px solid #e2ecf4;font-size:12px;">Совместим с Cat.7A. До 40 Гбит/с (8P8C или GG45/ARJ45, TERA). Общий экран и экраны вокруг каждой пары (F/FTP или S/FTP).</td>
+                    <tr style="animation:rowHighlight 4s 5.5s infinite;">
+                        <td style="font-family:'Consolas',monospace;font-weight:800;color:#c04060;">Cat.8.2</td>
+                        <td style="font-family:'Consolas',monospace;">1600-2000</td>
+                        <td>40GBASE-T</td>
+                        <td style="font-size:11px;">Совместим с Cat.7A. До 40 Гбит/с (8P8C или GG45/ARJ45, TERA). Общий экран и экраны вокруг каждой пары (F/FTP или S/FTP).</td>
                     </tr>
                 </tbody>
             </table>
@@ -570,253 +823,253 @@
 
 
     <!-- ==================== РАЗДЕЛ 5. ЭКРАНИРОВАНИЕ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(30,96,145,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ad0e0,#1e6091);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,96,145,.3);">🛡️</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ad0e0,#1e6091);">🛡️</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 5</div>
-                <div style="font-size:26px;font-weight:800;color:#12385c;">Виды кабеля: экранирование</div>
+                <div class="section-sub">РАЗДЕЛ 5</div>
+                <div class="section-title">Виды кабеля: экранирование</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Конструкция кабелей витой пары бывает как с экраном, так и без него. Для домашней или офисной сети с небольшими расстояниями и без электромагнитных помех вполне подходит кабель без защитного экрана. Для больших расстояний, а также в местах с электромагнитными наводками нужно использовать кабели с защитным экраном.
         </p>
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             В локальных сетях, работающих на скоростях 100 или 1000 Мбит/с, применяются в основном неэкранированные кабели. Однако для высокоскоростных сетей 10 Гбит/с, 40 Гбит/с, 100 Гбит/с стандарты определяют использование только экранированных кабелей.
         </p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
-            <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-left:4px solid #1e6091;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#1e6091;margin-bottom:6px;">UTP / U/UTP</div>
-                <div style="font-size:12.5px;color:#4a6a80;line-height:1.6;">Неэкранированная витая пара. Кабель не имеет защитного экрана. 90% всех сетей мира.</div>
+        <div class="grid">
+            <div class="card" style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border-color:#c8e4ee;border-left:4px solid #1e6091;animation:shieldPulse 3s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#1e6091;margin-bottom:4px;">UTP / U/UTP</div>
+                <div style="font-size:12px;color:#4a6a80;line-height:1.55;">Неэкранированная витая пара. Кабель не имеет защитного экрана. 90% всех сетей мира.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#1a6a3a;margin-bottom:6px;">FTP / F/UTP</div>
-                <div style="font-size:12.5px;color:#3d6a4d;line-height:1.6;">Фольгированная витая пара. Кабель имеет один внешний общий защитный слой из фольги.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;border-left:4px solid #2a9a5a;animation:shieldPulse 3s .5s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#1a6a3a;margin-bottom:4px;">FTP / F/UTP</div>
+                <div style="font-size:12px;color:#3d6a4d;line-height:1.55;">Фольгированная витая пара. Кабель имеет один внешний общий защитный слой из фольги.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-left:4px solid #7a4ac0;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#5a2a90;margin-bottom:6px;">STP / S/UTP</div>
-                <div style="font-size:12.5px;color:#5a4a75;line-height:1.6;">Экранированная витая пара. Кабель имеет экран для каждой пары и внешнюю защиту наподобие сетки.</div>
+            <div class="card" style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border-color:#dccdf0;border-left:4px solid #7a4ac0;animation:shieldPulse 3s 1s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#5a2a90;margin-bottom:4px;">STP / S/UTP</div>
+                <div style="font-size:12px;color:#5a4a75;line-height:1.55;">Экранированная витая пара. Кабель имеет экран для каждой пары и внешнюю защиту наподобие сетки.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#fff8ec,#ffffff);border:1px solid #f0dcb8;border-left:4px solid #e0a050;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#8a5a10;margin-bottom:6px;">SSTP / S/FTP</div>
-                <div style="font-size:12.5px;color:#7a6030;line-height:1.6;">Фольгированная экранированная витая пара. Имеет фольгированную защиту каждой пары, а также внешний экран.</div>
+            <div class="card" style="background:linear-gradient(160deg,#fff8ec,#ffffff);border-color:#f0dcb8;border-left:4px solid #e0a050;animation:shieldPulse 3s 1.5s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#8a5a10;margin-bottom:4px;">SSTP / S/FTP</div>
+                <div style="font-size:12px;color:#7a6030;line-height:1.55;">Фольгированная экранированная витая пара. Имеет фольгированную защиту каждой пары, а также внешний экран.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-left:4px solid #1e6091;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#1e6091;margin-bottom:6px;">U/STP</div>
-                <div style="font-size:12.5px;color:#4a6a80;line-height:1.6;">Незащищенный кабель с экранированием витой пары. Нет общего экрана, но каждая пара имеет фольгированную защиту.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border-color:#c8e4ee;border-left:4px solid #1e6091;animation:shieldPulse 3s 2s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#1e6091;margin-bottom:4px;">U/STP</div>
+                <div style="font-size:12px;color:#4a6a80;line-height:1.55;">Незащищенный кабель с экранированием витой пары. Нет общего экрана, но каждая пара имеет фольгированную защиту.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:12px;padding:18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:15px;font-weight:900;color:#1a6a3a;margin-bottom:6px;">SFTP / SF/UTP</div>
-                <div style="font-size:12.5px;color:#3d6a4d;line-height:1.6;">Экранированная витая пара с защитой. Имеет два внешних экрана: медная сетка и экран-фольга. Между ними дренажный провод.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;border-left:4px solid #2a9a5a;animation:shieldPulse 3s 2.5s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:14px;font-weight:900;color:#1a6a3a;margin-bottom:4px;">SFTP / SF/UTP</div>
+                <div style="font-size:12px;color:#3d6a4d;line-height:1.55;">Экранированная витая пара с защитой. Имеет два внешних экрана: медная сетка и экран-фольга. Между ними дренажный провод.</div>
             </div>
         </div>
 
-        <div style="background:#fff8ec;border-left:4px solid #e0a050;border-radius:10px;padding:14px 18px;margin-top:16px;">
-            <div style="font-weight:800;color:#8a5a10;margin-bottom:6px;font-size:12px;letter-spacing:.5px;font-family:'Consolas','Courier New',monospace;">ВАЖНО</div>
-            <div style="font-size:13.5px;color:#7a6030;line-height:1.6;">Экран работает только при правильном <b>заземлении</b>. Незаземлённый экран превращается в антенну и делает помехи сильнее, чем в обычном UTP.</div>
+        <div class="note" style="border-left-color:#e0a050;background:#fff8ec;">
+            <b style="color:#8a5a10;">ВАЖНО</b><br>
+            Экран работает только при правильном <b>заземлении</b>. Незаземлённый экран превращается в антенну и делает помехи сильнее, чем в обычном UTP.
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 6. КОННЕКТОРЫ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(122,74,192,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#a06ae0,#7a4ac0);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(122,74,192,.3);">🔌</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#a06ae0,#7a4ac0);">🔌</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 6</div>
-                <div style="font-size:26px;font-weight:800;color:#5a2a90;">Разъём RJ-45 и схемы обжима</div>
+                <div class="section-sub">РАЗДЕЛ 6</div>
+                <div class="section-title">Разъём RJ-45 и схемы обжима</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 16px;text-align:justify;">
+        <p class="text">
             Стандартный разъём для витой пары — <b>RJ-45</b> <span style="color:#6f93a0;font-size:0.92em;">(технически 8P8C — 8 позиций, 8 контактов)</span>.
             Жилы раскладываются по контактам строго по одной из двух схем — <b>T568A</b> или <b>T568B</b>.
         </p>
 
         <!-- Схема T568B с правильными цветами и штриховкой -->
-        <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-radius:12px;padding:20px;margin-bottom:16px;">
-            <div style="font-family:'Consolas','Courier New',monospace;font-size:11px;color:#6f93a0;letter-spacing:2px;margin-bottom:14px;">СХЕМА T568B (НАИБОЛЕЕ РАСПРОСТРАНЁННАЯ)</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #c8a070;background:repeating-linear-gradient(45deg,#ffffff 0 3px,#e07b1a 3px 6px);"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">1</div>
+        <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-radius:12px;padding:12px;margin-bottom:12px;">
+            <div style="font-family:'Consolas','Courier New',monospace;font-size:10px;color:#6f93a0;letter-spacing:2px;margin-bottom:10px;">СХЕМА T568B (НАИБОЛЕЕ РАСПРОСТРАНЁННАЯ)</div>
+            <div class="scheme-row">
+                <div style="animation:contactBlink 2s infinite;">
+                    <div class="swatch" style="background:repeating-linear-gradient(45deg,#ffffff 0 3px,#e07b1a 3px 6px);border-color:#c8a070;"></div>
+                    <div class="num">1</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #b05f10;background:#e07b1a;"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">2</div>
+                <div style="animation:contactBlink 2s .2s infinite;">
+                    <div class="swatch" style="background:#e07b1a;border-color:#b05f10;"></div>
+                    <div class="num">2</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #6ab07c;background:repeating-linear-gradient(45deg,#ffffff 0 3px,#2a9a5a 3px 6px);"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">3</div>
+                <div style="animation:contactBlink 2s .4s infinite;">
+                    <div class="swatch" style="background:repeating-linear-gradient(45deg,#ffffff 0 3px,#2a9a5a 3px 6px);border-color:#6ab07c;"></div>
+                    <div class="num">3</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #1a4a90;background:#2a6ac0;"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">4</div>
+                <div style="animation:contactBlink 2s .6s infinite;">
+                    <div class="swatch" style="background:#2a6ac0;border-color:#1a4a90;"></div>
+                    <div class="num">4</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #6a9ac0;background:repeating-linear-gradient(45deg,#ffffff 0 3px,#2a6ac0 3px 6px);"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">5</div>
+                <div style="animation:contactBlink 2s .8s infinite;">
+                    <div class="swatch" style="background:repeating-linear-gradient(45deg,#ffffff 0 3px,#2a6ac0 3px 6px);border-color:#6a9ac0;"></div>
+                    <div class="num">5</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #1a6a3a;background:#2a9a5a;"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">6</div>
+                <div style="animation:contactBlink 2s 1s infinite;">
+                    <div class="swatch" style="background:#2a9a5a;border-color:#1a6a3a;"></div>
+                    <div class="num">6</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #a08a70;background:repeating-linear-gradient(45deg,#ffffff 0 3px,#7a4a20 3px 6px);"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">7</div>
+                <div style="animation:contactBlink 2s 1.2s infinite;">
+                    <div class="swatch" style="background:repeating-linear-gradient(45deg,#ffffff 0 3px,#7a4a20 3px 6px);border-color:#a08a70;"></div>
+                    <div class="num">7</div>
                 </div>
-                <div style="text-align:center;">
-                    <div style="width:44px;height:34px;border-radius:6px;border:1px solid #4a2a10;background:#7a4a20;"></div>
-                    <div style="font-size:10px;color:#6f93a0;font-family:'Consolas',monospace;margin-top:4px;">8</div>
+                <div style="animation:contactBlink 2s 1.4s infinite;">
+                    <div class="swatch" style="background:#7a4a20;border-color:#4a2a10;"></div>
+                    <div class="num">8</div>
                 </div>
             </div>
-            <div style="font-size:12.5px;color:#5a4a75;margin-top:12px;line-height:1.6;">
+            <div style="font-size:11px;color:#5a4a75;margin-top:8px;line-height:1.5;">
                 <b>1</b> бело-оранжевый (штрих) · <b>2</b> оранжевый · <b>3</b> бело-зелёный (штрих) · <b>4</b> синий ·
                 <b>5</b> бело-синий (штрих) · <b>6</b> зелёный · <b>7</b> бело-коричневый (штрих) · <b>8</b> коричневый
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:16px;">
-            <div style="background:#eaf6fb;border:1px solid #c8e4ee;border-left:4px solid #1e6091;border-radius:10px;padding:16px 18px;">
-                <div style="font-size:14px;font-weight:800;color:#12385c;margin-bottom:6px;">Прямой патч-корд</div>
-                <div style="font-size:13px;color:#4a6a80;line-height:1.6;">Оба конца обжаты по одной схеме (обычно T568B). Используется для подключения ПК к коммутатору, розетки к патч-панели. 99% кабелей в сети — прямые.</div>
+        <div class="grid" style="margin-bottom:12px;">
+            <div class="card" style="background:#eaf6fb;border-color:#c8e4ee;border-left:4px solid #1e6091;">
+                <div style="font-size:13px;font-weight:800;color:#12385c;margin-bottom:4px;">Прямой патч-корд</div>
+                <div style="font-size:12px;color:#4a6a80;line-height:1.55;">Оба конца обжаты по одной схеме (обычно T568B). Используется для подключения ПК к коммутатору, розетки к патч-панели. 99% кабелей в сети — прямые.</div>
             </div>
-            <div style="background:#fff8ec;border:1px solid #f0dcb8;border-left:4px solid #e0a050;border-radius:10px;padding:16px 18px;">
-                <div style="font-size:14px;font-weight:800;color:#8a5a10;margin-bottom:6px;">Кросс-кабель</div>
-                <div style="font-size:13px;color:#7a6030;line-height:1.6;">Один конец по T568A, другой по T568B. Нужен для соединения «однотипных» устройств напрямую. Современные порты с <b>Auto-MDIX</b> делают его ненужным.</div>
+            <div class="card" style="background:#fff8ec;border-color:#f0dcb8;border-left:4px solid #e0a050;">
+                <div style="font-size:13px;font-weight:800;color:#8a5a10;margin-bottom:4px;">Кросс-кабель</div>
+                <div style="font-size:12px;color:#7a6030;line-height:1.55;">Один конец по T568A, другой по T568B. Нужен для соединения «однотипных» устройств напрямую. Современные порты с <b>Auto-MDIX</b> делают его ненужным.</div>
             </div>
         </div>
 
-        <div style="background:#f5f9fc;border-left:4px solid #4ad0e0;border-radius:10px;padding:14px 18px;">
-            <div style="font-weight:800;color:#1e6091;margin-bottom:6px;font-size:12px;letter-spacing:.5px;font-family:'Consolas','Courier New',monospace;">СОВЕТ</div>
-            <div style="font-size:13.5px;color:#3d5568;line-height:1.6;">В одной сети придерживайтесь <b>одной</b> схемы. Если вся инфраструктура обжата по T568B — обжимайте новые кабели так же, иначе получите путаницу при диагностике.</div>
+        <div class="note">
+            <b>СОВЕТ</b><br>
+            В одной сети придерживайтесь <b>одной</b> схемы. Если вся инфраструктура обжата по T568B — обжимайте новые кабели так же, иначе получите путаницу при диагностике.
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 7. ГДЕ ИСПОЛЬЗУЕТСЯ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(42,154,90,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ac070,#1a6a3a);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(42,154,90,.3);">🌍</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ac070,#1a6a3a);">🌍</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 7</div>
-                <div style="font-size:26px;font-weight:800;color:#1a6a3a;">Для чего и где используется</div>
+                <div class="section-sub">РАЗДЕЛ 7</div>
+                <div class="section-title">Для чего и где используется</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             Витая пара — самый распространённый физический уровень передачи данных.
             Практически любое устройство с сетевым портом <b>RJ-45</b> подключено именно ей.
             Перечислим основные сценарии.
         </p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:18px;">
-            <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">🏢</div>
-                <div style="font-size:14px;font-weight:800;color:#12385c;margin-bottom:6px;">Офисные ЛВС</div>
-                <div style="font-size:12.5px;color:#4a6a80;line-height:1.55;">Каждая розетка в офисе, каждый патч-корд в серверной — это витая пара. Рабочие места, принтеры, коммутаторы.</div>
+        <div class="grid" style="margin-bottom:12px;">
+            <div class="card" style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border-color:#c8e4ee;animation:floatCard 4s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">🏢</div>
+                <div style="font-size:13px;font-weight:800;color:#12385c;margin-bottom:4px;">Офисные ЛВС</div>
+                <div style="font-size:12px;color:#4a6a80;line-height:1.55;">Каждая розетка в офисе, каждый патч-корд в серверной — это витая пара. Рабочие места, принтеры, коммутаторы.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">🏠</div>
-                <div style="font-size:14px;font-weight:800;color:#1a6a3a;margin-bottom:6px;">Домашний интернет</div>
-                <div style="font-size:12.5px;color:#3d6a4d;line-height:1.55;">Подключение роутера к ONT/модему, ТВ-приставки, игровой консоли и стационарного ПК.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;animation:floatCard 4s .3s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">🏠</div>
+                <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">Домашний интернет</div>
+                <div style="font-size:12px;color:#3d6a4d;line-height:1.55;">Подключение роутера к ONT/модему, ТВ-приставки, игровой консоли и стационарного ПК.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">📞</div>
-                <div style="font-size:14px;font-weight:800;color:#5a2a90;margin-bottom:6px;">Телефония</div>
-                <div style="font-size:12.5px;color:#5a4a75;line-height:1.55;">Аналоговые и IP-телефоны. Одна и та же кабельная инфраструктура обслуживает и голос, и данные.</div>
+            <div class="card" style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border-color:#dccdf0;animation:floatCard 4s .6s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">📞</div>
+                <div style="font-size:13px;font-weight:800;color:#5a2a90;margin-bottom:4px;">Телефония</div>
+                <div style="font-size:12px;color:#5a4a75;line-height:1.55;">Аналоговые и IP-телефоны. Одна и та же кабельная инфраструктура обслуживает и голос, и данные.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#fff8ec,#ffffff);border:1px solid #f0dcb8;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">⚡</div>
-                <div style="font-size:14px;font-weight:800;color:#8a5a10;margin-bottom:6px;">PoE-устройства</div>
-                <div style="font-size:12.5px;color:#7a6030;line-height:1.55;">IP-камеры, точки доступа Wi-Fi, домофоны, VoIP-телефоны — питаются прямо по кабелю.</div>
+            <div class="card" style="background:linear-gradient(160deg,#fff8ec,#ffffff);border-color:#f0dcb8;animation:floatCard 4s .9s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">⚡</div>
+                <div style="font-size:13px;font-weight:800;color:#8a5a10;margin-bottom:4px;">PoE-устройства</div>
+                <div style="font-size:12px;color:#7a6030;line-height:1.55;">IP-камеры, точки доступа Wi-Fi, домофоны, VoIP-телефоны — питаются прямо по кабелю.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#ffeef2,#ffffff);border:1px solid #f0cdd6;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">🏭</div>
-                <div style="font-size:14px;font-weight:800;color:#8a2040;margin-bottom:6px;">Промышленность</div>
-                <div style="font-size:12.5px;color:#7a4055;line-height:1.55;">Станки с ЧПУ, контроллеры, датчики, АСУ ТП. Здесь применяют экранированные кабели и усиленные разъёмы.</div>
+            <div class="card" style="background:linear-gradient(160deg,#ffeef2,#ffffff);border-color:#f0cdd6;animation:floatCard 4s 1.2s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">🏭</div>
+                <div style="font-size:13px;font-weight:800;color:#8a2040;margin-bottom:4px;">Промышленность</div>
+                <div style="font-size:12px;color:#7a4055;line-height:1.55;">Станки с ЧПУ, контроллеры, датчики, АСУ ТП. Здесь применяют экранированные кабели и усиленные разъёмы.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border:1px solid #c8e4ee;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">🖥️</div>
-                <div style="font-size:14px;font-weight:800;color:#12385c;margin-bottom:6px;">ЦОД и серверные</div>
-                <div style="font-size:12.5px;color:#4a6a80;line-height:1.55;">Cat 6a и Cat 8 для соединения стоек и коммутаторов, плотная коммутация на патч-панелях.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eaf6fb,#ffffff);border-color:#c8e4ee;animation:floatCard 4s 1.5s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">🖥️</div>
+                <div style="font-size:13px;font-weight:800;color:#12385c;margin-bottom:4px;">ЦОД и серверные</div>
+                <div style="font-size:12px;color:#4a6a80;line-height:1.55;">Cat 6a и Cat 8 для соединения стоек и коммутаторов, плотная коммутация на патч-панелях.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">📺</div>
-                <div style="font-size:14px;font-weight:800;color:#1a6a3a;margin-bottom:6px;">IPTV и мультимедиа</div>
-                <div style="font-size:12.5px;color:#3d6a4d;line-height:1.55;">ТВ-приставки, медиаплееры, мультирум-системы, видеостены.</div>
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;animation:floatCard 4s 1.8s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">📺</div>
+                <div style="font-size:13px;font-weight:800;color:#1a6a3a;margin-bottom:4px;">IPTV и мультимедиа</div>
+                <div style="font-size:12px;color:#3d6a4d;line-height:1.55;">ТВ-приставки, медиаплееры, мультирум-системы, видеостены.</div>
             </div>
-            <div style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border:1px solid #dccdf0;border-radius:12px;padding:18px;">
-                <div style="font-size:26px;margin-bottom:8px;">🏫</div>
-                <div style="font-size:14px;font-weight:800;color:#5a2a90;margin-bottom:6px;">Учебные классы</div>
-                <div style="font-size:12.5px;color:#5a4a75;line-height:1.55;">Компьютерные классы, интерактивные панели, лабораторные стенды по сетям.</div>
+            <div class="card" style="background:linear-gradient(160deg,#f5f0ff,#ffffff);border-color:#dccdf0;animation:floatCard 4s 2.1s infinite;">
+                <div style="font-size:22px;margin-bottom:6px;">🏫</div>
+                <div style="font-size:13px;font-weight:800;color:#5a2a90;margin-bottom:4px;">Учебные классы</div>
+                <div style="font-size:12px;color:#5a4a75;line-height:1.55;">Компьютерные классы, интерактивные панели, лабораторные стенды по сетям.</div>
             </div>
         </div>
 
-        <div style="background:#eefaf1;border-left:4px solid #2a9a5a;border-radius:10px;padding:14px 18px;">
-            <div style="font-weight:800;color:#1a6a3a;margin-bottom:6px;font-size:12px;letter-spacing:.5px;font-family:'Consolas','Courier New',monospace;">ГЛАВНОЕ</div>
-            <div style="font-size:13.5px;color:#3d5568;line-height:1.6;">Витая пара — это «последние 100 метров» любой сети. Оптика строит магистрали, а до рабочего места, камеры или квартиры сигнал почти всегда доходит по меди.</div>
+        <div class="note" style="border-left-color:#2a9a5a;background:#eefaf1;">
+            <b style="color:#1a6a3a;">ГЛАВНОЕ</b><br>
+            Витая пара — это «последние 100 метров» любой сети. Оптика строит магистрали, а до рабочего места, камеры или квартиры сигнал почти всегда доходит по меди.
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 8. PoE ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(224,160,80,.08);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#f0b870,#e0a050);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(224,160,80,.35);">⚡</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#f0b870,#e0a050);">⚡</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 8</div>
-                <div style="font-size:26px;font-weight:800;color:#8a5a10;">PoE — питание по витой паре</div>
+                <div class="section-sub">РАЗДЕЛ 8</div>
+                <div class="section-title">PoE — питание по витой паре</div>
             </div>
         </div>
 
-        <p style="font-size:14.5px;color:#3d5568;line-height:1.75;margin:0 0 18px;text-align:justify;">
+        <p class="text">
             <b style="color:#8a5a10;">PoE</b> <span style="color:#6f93a0;font-size:0.92em;">(Power over Ethernet — питание по Ethernet)</span>
             позволяет передавать по тому же кабелю не только данные, но и электропитание.
             Устройству не нужна отдельная розетка 220 В — достаточно одного патч-корда.
         </p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:16px;">
-            <div style="background:#ffffff;border:1px solid #f0dcb8;border-top:4px solid #e0a050;border-radius:12px;padding:16px 18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#8a5a10;margin-bottom:6px;">802.3af (PoE)</div>
-                <div style="font-size:22px;font-weight:900;color:#12385c;margin-bottom:4px;">15,4 Вт</div>
-                <div style="font-size:12.5px;color:#7a6030;line-height:1.55;">До 12,95 Вт на устройство. IP-телефоны, простые камеры, датчики.</div>
+        <div class="grid" style="margin-bottom:12px;">
+            <div class="card" style="background:#ffffff;border-color:#f0dcb8;border-top:4px solid #e0a050;animation:boltPulse 2s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#8a5a10;margin-bottom:4px;">802.3af (PoE)</div>
+                <div style="font-size:20px;font-weight:900;color:#12385c;margin-bottom:2px;">15,4 Вт</div>
+                <div style="font-size:11.5px;color:#7a6030;line-height:1.5;">До 12,95 Вт на устройство. IP-телефоны, простые камеры, датчики.</div>
             </div>
-            <div style="background:#ffffff;border:1px solid #f0dcb8;border-top:4px solid #e0a050;border-radius:12px;padding:16px 18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#8a5a10;margin-bottom:6px;">802.3at (PoE+)</div>
-                <div style="font-size:22px;font-weight:900;color:#12385c;margin-bottom:4px;">30 Вт</div>
-                <div style="font-size:12.5px;color:#7a6030;line-height:1.55;">До 25,5 Вт. Точки доступа Wi-Fi, поворотные камеры, видеодомофоны.</div>
+            <div class="card" style="background:#ffffff;border-color:#f0dcb8;border-top:4px solid #e0a050;animation:boltPulse 2s .3s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#8a5a10;margin-bottom:4px;">802.3at (PoE+)</div>
+                <div style="font-size:20px;font-weight:900;color:#12385c;margin-bottom:2px;">30 Вт</div>
+                <div style="font-size:11.5px;color:#7a6030;line-height:1.5;">До 25,5 Вт. Точки доступа Wi-Fi, поворотные камеры, видеодомофоны.</div>
             </div>
-            <div style="background:#ffffff;border:1px solid #f0dcb8;border-top:4px solid #c04060;border-radius:12px;padding:16px 18px;">
-                <div style="font-family:'Consolas','Courier New',monospace;font-size:13px;font-weight:900;color:#8a2040;margin-bottom:6px;">802.3bt (PoE++)</div>
-                <div style="font-size:22px;font-weight:900;color:#12385c;margin-bottom:4px;">60 / 90 Вт</div>
-                <div style="font-size:12.5px;color:#7a4055;line-height:1.55;">Мощные точки доступа, панели освещения, дисплеи, промышленные терминалы.</div>
+            <div class="card" style="background:#ffffff;border-color:#f0dcb8;border-top:4px solid #c04060;animation:boltPulse 2s .6s infinite;">
+                <div style="font-family:'Consolas','Courier New',monospace;font-size:12px;font-weight:900;color:#8a2040;margin-bottom:4px;">802.3bt (PoE++)</div>
+                <div style="font-size:20px;font-weight:900;color:#12385c;margin-bottom:2px;">60 / 90 Вт</div>
+                <div style="font-size:11.5px;color:#7a4055;line-height:1.5;">Мощные точки доступа, панели освещения, дисплеи, промышленные терминалы.</div>
             </div>
         </div>
 
-        <div style="background:#fff8ec;border-left:4px solid #e0a050;border-radius:10px;padding:14px 18px;">
-            <div style="font-weight:800;color:#8a5a10;margin-bottom:6px;font-size:12px;letter-spacing:.5px;font-family:'Consolas','Courier New',monospace;">ОГРАНИЧЕНИЕ</div>
-            <div style="font-size:13.5px;color:#7a6030;line-height:1.6;">Чем больше мощность, тем сильнее нагрев кабеля и тем выше требования к его сечению. Для PoE++ рекомендуются кабели Cat 6a и короче 100 м.</div>
+        <div class="note" style="border-left-color:#e0a050;background:#fff8ec;">
+            <b style="color:#8a5a10;">ОГРАНИЧЕНИЕ</b><br>
+            Чем больше мощность, тем сильнее нагрев кабеля и тем выше требования к его сечению. Для PoE++ рекомендуются кабели Cat 6a и короче 100 м.
         </div>
     </div>
 
 
     <!-- ==================== РАЗДЕЛ 9. ПЛЮСЫ И МИНУСЫ ==================== -->
-    <div style="background:#ffffff;border-radius:16px;padding:32px 28px;border:1px solid #d8e6f0;box-shadow:0 4px 20px rgba(30,96,145,.06);margin-bottom:22px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ad0e0,#1e6091);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,96,145,.3);">⚖️</div>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ad0e0,#1e6091);">⚖️</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">РАЗДЕЛ 9</div>
-                <div style="font-size:26px;font-weight:800;color:#12385c;">Преимущества и ограничения</div>
+                <div class="section-sub">РАЗДЕЛ 9</div>
+                <div class="section-title">Преимущества и ограничения</div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
-            <div style="background:linear-gradient(160deg,#eefaf1,#ffffff);border:1px solid #c8ecd4;border-radius:12px;padding:18px;">
-                <div style="font-size:13px;font-weight:900;color:#1a6a3a;margin-bottom:12px;font-family:'Consolas','Courier New',monospace;letter-spacing:1px;">✔ СИЛЬНЫЕ СТОРОНЫ</div>
-                <div style="font-size:13px;color:#3d6a4d;line-height:1.75;">
+        <div class="grid">
+            <div class="card" style="background:linear-gradient(160deg,#eefaf1,#ffffff);border-color:#c8ecd4;animation:sway 5s infinite;">
+                <div style="font-size:12px;font-weight:900;color:#1a6a3a;margin-bottom:8px;font-family:'Consolas','Courier New',monospace;letter-spacing:1px;">✔ СИЛЬНЫЕ СТОРОНЫ</div>
+                <div style="font-size:12px;color:#3d6a4d;line-height:1.7;">
                     • Самая низкая цена кабеля и разъёмов<br>
                     • Простой монтаж и обжим — нужен только кримпер<br>
                     • Гибкость и малый радиус изгиба<br>
@@ -825,9 +1078,9 @@
                     • Ремонтопригодность: заменить розетку или патч-корд — дело минут
                 </div>
             </div>
-            <div style="background:linear-gradient(160deg,#ffeef2,#ffffff);border:1px solid #f0cdd6;border-radius:12px;padding:18px;">
-                <div style="font-size:13px;font-weight:900;color:#8a2040;margin-bottom:12px;font-family:'Consolas','Courier New',monospace;letter-spacing:1px;">✘ ОГРАНИЧЕНИЯ</div>
-                <div style="font-size:13px;color:#7a4055;line-height:1.75;">
+            <div class="card" style="background:linear-gradient(160deg,#ffeef2,#ffffff);border-color:#f0cdd6;animation:sway 5s .5s infinite;">
+                <div style="font-size:12px;font-weight:900;color:#8a2040;margin-bottom:8px;font-family:'Consolas','Courier New',monospace;letter-spacing:1px;">✘ ОГРАНИЧЕНИЯ</div>
+                <div style="font-size:12px;color:#7a4055;line-height:1.7;">
                     • Жёсткий лимит длины — <b>100 м</b> на сегмент<br>
                     • Подверженность электромагнитным помехам<br>
                     • Перекрёстные наводки между парами<br>
@@ -841,21 +1094,21 @@
 
 
     <!-- ==================== ИТОГ ==================== -->
-    <div style="background:linear-gradient(135deg,#e8f6fa 0%,#f4fbfd 45%,#ffffff 100%);border-radius:16px;padding:32px 28px;border:1px solid #c8e4ee;box-shadow:0 4px 20px rgba(30,96,145,.08);margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#4ad0e0,#1e6091);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,96,145,.3);">✅</div>
+    <div class="section" style="background:linear-gradient(135deg,#e8f6fa 0%,#f4fbfd 45%,#ffffff 100%);border-color:#c8e4ee;">
+        <div class="section-header">
+            <div class="section-icon" style="background:linear-gradient(135deg,#4ad0e0,#1e6091);">✅</div>
             <div>
-                <div style="font-size:11px;color:#6f93a0;letter-spacing:2px;font-family:'Consolas','Courier New',monospace;">ИТОГ МОДУЛЯ</div>
-                <div style="font-size:26px;font-weight:800;color:#12385c;">Пять главных мыслей</div>
+                <div class="section-sub">ИТОГ МОДУЛЯ</div>
+                <div class="section-title">Пять главных мыслей</div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;">
-            <div style="background:#ffffff;border:1px solid #c8e4ee;border-left:4px solid #1e6091;border-radius:10px;padding:14px 16px;font-size:13px;color:#3d5568;line-height:1.6;"><b style="color:#1e6091;">1.</b> Витая пара — это пары скрученных медных жил; скрутка нужна для подавления помех.</div>
-            <div style="background:#ffffff;border:1px solid #c8ecd4;border-left:4px solid #2a9a5a;border-radius:10px;padding:14px 16px;font-size:13px;color:#3d5568;line-height:1.6;"><b style="color:#1a6a3a;">2.</b> Категория определяет частоту и скорость: от Cat 1 до Cat 8.2.</div>
-            <div style="background:#ffffff;border:1px solid #dccdf0;border-left:4px solid #7a4ac0;border-radius:10px;padding:14px 16px;font-size:13px;color:#3d5568;line-height:1.6;"><b style="color:#5a2a90;">3.</b> Экран помогает только при правильном заземлении.</div>
-            <div style="background:#ffffff;border:1px solid #f0dcb8;border-left:4px solid #e0a050;border-radius:10px;padding:14px 16px;font-size:13px;color:#3d5568;line-height:1.6;"><b style="color:#8a5a10;">4.</b> Один кабель — и данные, и питание (PoE).</div>
-            <div style="background:#ffffff;border:1px solid #f0cdd6;border-left:4px solid #c04060;border-radius:10px;padding:14px 16px;font-size:13px;color:#3d5568;line-height:1.6;"><b style="color:#8a2040;">5.</b> Помните про 100 метров и проверяйте линию тестером.</div>
+        <div class="grid">
+            <div class="card" style="border-color:#c8e4ee;border-left:4px solid #1e6091;animation:fadeInUp 1s both;font-size:12.5px;color:#3d5568;line-height:1.55;"><b style="color:#1e6091;">1.</b> Витая пара — это пары скрученных медных жил; скрутка нужна для подавления помех.</div>
+            <div class="card" style="border-color:#c8ecd4;border-left:4px solid #2a9a5a;animation:fadeInUp 1s .2s both;font-size:12.5px;color:#3d5568;line-height:1.55;"><b style="color:#1a6a3a;">2.</b> Категория определяет частоту и скорость: от Cat 1 до Cat 8.2.</div>
+            <div class="card" style="border-color:#dccdf0;border-left:4px solid #7a4ac0;animation:fadeInUp 1s .4s both;font-size:12.5px;color:#3d5568;line-height:1.55;"><b style="color:#5a2a90;">3.</b> Экран помогает только при правильном заземлении.</div>
+            <div class="card" style="border-color:#f0dcb8;border-left:4px solid #e0a050;animation:fadeInUp 1s .6s both;font-size:12.5px;color:#3d5568;line-height:1.55;"><b style="color:#8a5a10;">4.</b> Один кабель — и данные, и питание (PoE).</div>
+            <div class="card" style="border-color:#f0cdd6;border-left:4px solid #c04060;animation:fadeInUp 1s .8s both;font-size:12.5px;color:#3d5568;line-height:1.55;"><b style="color:#8a2040;">5.</b> Помните про 100 метров и проверяйте линию тестером.</div>
         </div>
     </div>
 
